@@ -49,8 +49,10 @@ be_server.use(cors());
  * Test Route
  * 
  * A simple GET route to check if the server is running.
+ * 
+ * NOTE: We will use Playwright to do testing in further lessons (refer to test folder)
  */
-be_server.get('/', (req: Request, res: Response) => {
+be_server.get('/api/@test', (req: Request, res: Response) => {
     res.json({ message: 'Server is running' });
 });
 
