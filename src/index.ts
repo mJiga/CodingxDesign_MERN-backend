@@ -130,7 +130,7 @@ export const createResources = be_server.post('/resources', (req: Request, res: 
     if (!item.id) item.id = Math.floor(Math.random() * 1000);
     
     resources.push(item);
-    res.status(201).json(item);
+    res.status(200).json(item);
 });
 
 /**

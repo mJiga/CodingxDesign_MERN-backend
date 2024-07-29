@@ -1,7 +1,7 @@
 import { test, expect } from 'playwright/test';
-import 'dotenv/config'; // Load environment variables from a .env file
+import { deleteResource } from '../backend/src/index'
 
-const PORT = process.env.PORT || 7000;
+const PORT = 7000;
 
 test.describe('Initial Backend API Tests', () => {
   // Define your backend URL here
@@ -46,4 +46,34 @@ test.describe('Initial Backend API Tests', () => {
     // Verify that the retrieved resource matches what we created
     expect(retrievedResource).toEqual(createdResource);
   });
+
+  test('should retrieve a specific resource by ID', async ({ request }) => { 
+    const newResource = { name: 'Test Resource' }; 
+    const postResponse = await request.post(`${backendUrl}/resources`, { data: newResource });
+    const createdResource = await postResponse.json();
+    const response = await request.get(`${backendUrl}/resources/${createdResource.id}`);
+    expect(response.status()).toBe(200);
+    const responseBody = await response.json();
+    expect(responseBody).toEqual(createdResource);
+  });
+
+  test('should delete an existing resource', async ({ request }) => { 
+    const newResource = { name: 'Test Resource' };
+  
+    // Create the resource
+    const postResponse = await request.post(`${backendUrl}/resources`, { data: newResource });
+    expect(postResponse.status()).toBe(200);
+    const createdResource = await postResponse.json();
+  
+    // Delete the resource
+    const deleteResponse = await request.delete(`${backendUrl}/resources/${createdResource.id}`);
+    expect(deleteResponse.status()).toBe(200);
+    const deleteResponseBody = await deleteResponse.text();
+    expect(deleteResponseBody).toBe('Resource deleted'); 
+  
+    // Verify the resource no longer exists
+    const getResponse = await request.get(`${backendUrl}/resources/${createdResource.id}`);
+    expect(getResponse.status()).toBe(404);
+  });
+  
 });
