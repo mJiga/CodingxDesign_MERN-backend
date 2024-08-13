@@ -1,6 +1,11 @@
 //Constructor for Booking Interface (Booking Object)
 
-export interface Booking {
-    name: string;
-    lastname: string;
+export interface Course {
+  courseId: string;
+  courseName: string;
+  classification: number;
+  semester: number;
+  optative: boolean;
+  meetingTime: string;
+  courseCode: string;
 }
