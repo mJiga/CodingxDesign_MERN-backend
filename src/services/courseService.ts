@@ -6,8 +6,8 @@ const postCourse = async (course: Course) => {
   return responsePost;
 };
 
-const getCourse = async (id: string) => {
-  const responseGet = await CourseModel.findOne({ _id: id });
+const getCourse = async (courseName: string) => {
+  const responseGet = await CourseModel.findOne({ courseName });
   return responseGet;
 };
 
@@ -16,4 +16,21 @@ const getCourses = async () => {
   return responseGets;
 };
 
-export { postCourse, getCourse, getCourses };
+const updateCourse = async (
+  courseName: string,
+  newInformation: Partial<Course>
+) => {
+  const responseUpdate = await CourseModel.findOneAndUpdate(
+    { className: courseName },
+    newInformation,
+    { new: true }
+  );
+  return responseUpdate;
+};
+
+const deleteCourse = async (courseName: string) => {
+  const responseDelete = await CourseModel.deleteOne({ courseName });
+  return responseDelete;
+};
+
+export { postCourse, getCourse, getCourses, updateCourse, deleteCourse };

@@ -11,9 +11,9 @@ import {
 const router = Router();
 
 router.get("/", handleGetCourses);
-router.get("/:id", handleGetCourse);
+router.get("/:courseName", handleGetCourse);
 router.post("/", handlePostCourse);
-router.put("/:id", handleUpdateCourse);
-router.delete("/:id", handleDeleteCourse);
+router.put("/:courseName", handleUpdateCourse);
+router.delete("/:courseName", handleDeleteCourse);
 
 export { router };

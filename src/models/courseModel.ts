@@ -4,7 +4,7 @@ import { Course } from "../interfaces/Course";
 
 const CourseSchema = new Schema<Course>(
   {
-    className: {
+    courseName: {
       type: String,
       required: true,
     },
