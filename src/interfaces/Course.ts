@@ -2,7 +2,7 @@
 
 export interface Course {
   courseName: string;
-  classification: number;
+  classification: string;
   meetingTime: string;
   courseNumber: string;
 }

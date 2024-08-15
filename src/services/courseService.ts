@@ -21,7 +21,7 @@ const updateCourse = async (
   newInformation: Partial<Course>
 ) => {
   const responseUpdate = await CourseModel.findOneAndUpdate(
-    { className: courseName },
+    { courseName: courseName },
     newInformation,
     { new: true }
   );

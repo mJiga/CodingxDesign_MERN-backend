@@ -9,7 +9,7 @@ const CourseSchema = new Schema<Course>(
       required: true,
     },
     classification: {
-      type: Number,
+      type: String,
       required: true,
     },
     meetingTime: {
